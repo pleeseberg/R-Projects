@@ -1,112 +1,71 @@
-# Sentiment Analysis Project
+# Sentiment Analysis and Time Series Visualization
 
-## Overview
+Welcome to the **Sentiment Analysis and Time Series Visualization** project. This project focuses on analyzing sentiment from tweets related to Amazon and visualizing these sentiments over time.
 
-Sentiment analysis is a powerful tool for understanding opinions and emotions expressed in text. This project aims to develop a model to classify sentiment in text data, such as tweets or reviews, into positive, negative, or neutral categories. The project seeks to provide valuable insights into user sentiments and trends by leveraging machine learning techniques.
+## Project Overview
 
-## Motivation
+### 1. Sentiment Analysis
 
-Understanding sentiment in text data can offer actionable insights for businesses, social media analysts, and researchers. This project aims to apply machine learning to sentiment analysis, enhancing the ability to categorize and interpret large volumes of text data efficiently.
+Sentiment analysis is used to interpret and quantify the emotional tone or attitude expressed in text. This involves:
 
-## Requirements
+- **Data Collection:** Gathering tweets related to Amazon.
+- **Text Processing:** Cleaning the text by removing punctuation, numbers, and irrelevant words.
+- **Sentiment Analysis:** Calculating sentiment scores by date to explore trends in sentiment.
 
-1. **Data Collection and Preprocessing:**
-   - **Dataset:** Sentiment140 in CSV format.
-   - **Text Preprocessing:** Use NLTK and SpaCy for tasks including tokenization, normalization, stop word removal, and stemming/lemmatization.
+## Data Cleaning
 
-2. **Feature Extraction:**
-   - **Convert Text to Numerical Features:** Implement techniques like Bag of Words or TF-IDF using Python libraries.
+Text cleaning, or text preprocessing, transforms raw text into a structured format suitable for analysis. Key steps include:
 
-## Model Evaluation
+- **Removing Noise:** Eliminating irrelevant or inconsistent data.
+- **Normalization:** Converting text to lowercase and stripping out unwanted characters.
+- **Filtering Stopwords:** Removing common words (e.g., “and,” “the,” “is”) that do not contribute significant meaning.
 
-### Confusion Matrices
+Common stock ticker symbols were filtered out to focus on more relevant terms. This step ensures that the analysis captures meaningful insights.
 
-Confusion matrices for each model, showing true positives, true negatives, false positives, and false negatives:
+## Sentiment Analysis
 
-> <img src="results/confusion_matrix.png" alt="Confusion Matrix" width="300" height="300">  
+Sentiment analysis assesses the emotional tone of the text using the NRC Sentiment Lexicon. This lexicon categorizes words into eight emotions (anger, fear, anticipation, trust, surprise, sadness, joy, disgust) and two sentiments (negative, positive). 
 
-### ROC Curves
+- **N-Grams Analysis:** This involves examining sequences of words (unigrams, bigrams, trigrams) to uncover patterns and trends in the text.
+  - **Unigrams:** Single words showing individual word frequencies.
+  - **Bigrams:** Pairs of consecutive words revealing common two-word combinations.
+  - **Trigrams:** Sequences of three consecutive words providing more context.
 
-ROC curves for each model, demonstrating their ability to distinguish between classes. AUC scores indicate model performance:
+## Top Ten Words
 
-> <img src="results/roc_curve.png" alt="ROC Curve" width="300" height="300">  
+The most frequent words in the tweet data are listed below. These words provide insight into common themes and topics discussed in the tweets:
 
-### Model Performance Summary
+1. **amazon** - 2760 occurrences
+2. **amc** - 2360 occurrences
+3. **trading** - 2282 occurrences
+4. **will** - 2143 occurrences
+5. **today** - 2086 occurrences
+6. **market** - 2070 occurrences
+7. **now** - 1742 occurrences
+8. **buy** - 1714 occurrences
+9. **top** - 1659 occurrences
+10. **like** - 1545 occurrences
 
-- **Logistic Regression:**  
-  - Cross-Validation Accuracy: 0.7563  
-  - Tuned Accuracy: 0.7560  
-  - AUC: 0.84
+## Plots and Visualizations
 
-- **Naive Bayes:**  
-  - Cross-Validation Accuracy: 0.7444  
-  - Tuned Accuracy: 0.7462  
-  - AUC: 0.83
+### Sentiment Barchart
 
-- **Linear SVC:**  
-  - Cross-Validation Accuracy: 0.7518  
-  - Tuned Accuracy: 0.7553  
-  - AUC: 0.84
+This plot shows the distribution of sentiments across the tweets, highlighting proportions of positive, negative, and neutral sentiments.
 
-## Feature Analysis
-
-### Feature Importances
-
-Top features for each model are illustrated in the following plots:
-
-- **Logistic Regression Top Features:**  
-  <img src="results/feature_importances.png" alt="Feature Importances" width="300" height="300">  
-
-- **Naive Bayes Top Features:**  
-  Description of top features with negative coefficients.
-
-- **Linear SVC Top Features:**  
-  Description of top features showing their importance.
-
-## Visualization and Interpretation
+![Sentiment Barchart](results/sentiment_barchart.png)
 
 ### Word Cloud
 
-Visualization of the most frequent words in the tweet text:
+The word cloud visualizes the frequency of words in the tweet data. Larger words represent higher frequency or importance.
 
-> <img src="results/word_cloud.png" alt="Word Cloud" width="300" height="300">  
+![Word Cloud](results/wordcloud.png)
 
-### Top TF-IDF Scores
+### Time Series Plot
 
-Bar chart showing the top TF-IDF scores for terms in the dataset:
+This plot displays the trend of sentiment scores over time, helping to understand how sentiment varies across different periods.
 
-> <img src="results/top_tfidf_scores.png" alt="Top TF-IDF Scores" width="300" height="300">  
+![Time Series Plot](results/sentiment_time_series_combined.png)
 
-### Performance Metrics Comparison
+## Conclusion
 
-Comparison of accuracy, precision, recall, and F1-score across models:
-
-> <img src="results/performance_metrics_comparison.png" alt="Performance Metrics Comparison" width="300" height="300">  
-
-## Challenges and Solutions
-
-- **Challenge:** Handling imbalanced classes in the dataset.
-  - **Solution:** Used stratified sampling and applied class weights to improve model performance.
-
-- **Challenge:** Feature extraction from noisy text data.
-  - **Solution:** Implemented advanced text preprocessing techniques to clean and normalize data effectively.
-
-## Real-World Applications
-
-The models and findings from this project can be applied in various domains, including:
-
-- **Customer Sentiment Analysis:** Businesses can use sentiment analysis to gauge customer feedback and improve products/services.
-- **Social Media Monitoring:** Analyze public sentiment on social media platforms to understand trends and user opinions.
-- **Market Research:** Enhance market research efforts by analyzing sentiment trends and consumer behavior.
-
-## Future Work and Improvements
-
-Future work could include:
-
-- Exploring additional features or models to improve classification performance.
-- Conducting further hyperparameter tuning to optimize model performance.
-- Analyzing sentiment trends over time or across different contexts.
-
-## Summary
-
-This sentiment analysis project involves loading and processing tweet data, training and evaluating various classification models, and analyzing the results through visualizations and feature importance. The models show competitive performance with opportunities for further enhancements.
+This project has successfully demonstrated how sentiment analysis can be applied to social media data to extract meaningful insights. By cleaning the text data and applying sentiment analysis techniques, we gained a better understanding of the emotional tone of tweets related to Amazon. The visualizations, including the sentiment barchart, word cloud, and time series plot, provide a comprehensive view of sentiment trends and key themes in the data. These insights can be valuable for monitoring public perception, identifying emerging trends, and making informed decisions based on social media sentiment.
