@@ -1,0 +1,89 @@
+# Load necessary packages
+if(!require(tidyverse)) install.packages('tidyverse', dependencies=TRUE)
+if(!require(ggplot2)) install.packages('ggplot2', dependencies=TRUE)
+if(!require(patchwork)) install.packages('patchwork', dependencies=TRUE)
+
+library(tidyverse)
+library(ggplot2)
+library(patchwork)
+
+# Load the sentiment analysis data
+sentiment_data <- read.csv("/Users/paigeleeseberg/Downloads/R-Projects/sentiment_analysis_data.csv")
+
+# Format the date column
+sentiment_data$date <- as.Date(sentiment_data$date)
+
+# Aggregate sentiment scores by date
+sentiment_time_series <- sentiment_data %>%
+  group_by(date) %>%
+  summarise(across(contains(c("anger", "anticipation", "disgust", "fear", "joy", "negative", "positive", "sadness", "surprise", "trust")), sum, na.rm = TRUE)) %>%
+  pivot_longer(cols = -date, names_to = "nrc", values_to = "n")
+
+# Define the updated color palette
+palette <- c(
+  "anger" = "#FF4C4C",        # Red
+  "anticipation" = "#FF9B5F", # Orange
+  "disgust" = "#8C9B7D",      # Olive
+  "fear" = "#B5B6B1",        # Gray
+  "joy" = "#F39C12",         # Darker Yellow
+  "negative" = "#C94C4C",     # Dark Red
+  "positive" = "#4CAF50",     # Green
+  "sadness" = "#9B9B9B",      # Medium Gray
+  "surprise" = "#F1C40F",     # Darker Beige
+  "trust" = "#5DADE2"         # Light Blue
+)
+
+# Create the timeline plot for all sentiments
+timeline_plot <- sentiment_time_series %>%
+  ggplot(aes(x = date, y = n, color = nrc, group = nrc)) +
+  geom_smooth(span = 0.5, se = FALSE, method = 'loess', formula = 'y ~ x') +
+  scale_y_continuous(limits = c(0, max(sentiment_time_series$n, na.rm = TRUE))) +
+  scale_x_date(date_breaks = "1 week", date_labels = "%b %d") +
+  scale_color_manual(values = palette) +
+  theme_bw(base_size = 15) +
+  theme(
+    text = element_text(family = "Georgia"),
+    plot.title = element_text(face = "bold"),
+    axis.text = element_text(size = 9),
+    axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0),
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    panel.background = element_rect(fill = "white"),
+    plot.background = element_rect(fill = "white"),
+    strip.background = element_rect(fill = "white"),
+    strip.text = element_text(size = 12, face = "bold")
+  ) +
+  labs(x = NULL, y = "Sentiment Score", color = "Emotion", title = "Sentiment Over Time")
+
+# Create individual plots for each sentiment
+facet_plots <- sentiment_time_series %>%
+  ggplot(aes(x = date, y = n, color = nrc, group = nrc)) +
+  geom_smooth(span = 0.5, se = FALSE, method = 'loess', formula = 'y ~ x') +
+  facet_wrap(~ nrc, scales = "free_y", nrow = 2) + # Arrange plots in 2 rows
+  scale_y_continuous(limits = c(0, max(sentiment_time_series$n, na.rm = TRUE))) +
+  scale_x_date(date_breaks = "1 week", date_labels = "%b %d") +
+  scale_color_manual(values = palette) +
+  theme_bw(base_size = 15) + 
+  theme(
+    text = element_text(family = "Georgia"),
+    plot.title = element_text(face = "bold"),
+    axis.text = element_text(size = 9),
+    axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0),
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    panel.background = element_rect(fill = "white"),
+    plot.background = element_rect(fill = "white"),
+    strip.background = element_rect(fill = "white"),
+    strip.text = element_text(size = 12, face = "bold"),
+    aspect.ratio = 1  # Ensure square facets
+  ) +
+  labs(x = NULL, y = "Sentiment Score", color = "Emotion", title = "NRC Sentiment Over Time")
+
+# Combine the timeline plot with the facet plots using patchwork
+combined_plot <- timeline_plot / facet_plots
+
+# Save the combined plot
+ggsave(filename = "/Users/paigeleeseberg/Downloads/R-Projects/sentiment_time_series_combined.png", plot = combined_plot, width = 16, height = 14, units = "in")
+
+# Print a summary of the time series data
+print(head(sentiment_time_series))
