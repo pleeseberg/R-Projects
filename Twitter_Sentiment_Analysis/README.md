@@ -69,12 +69,3 @@ This plot displays the trend of sentiment scores over time, helping to understan
 ## Conclusion
 
 This project has successfully demonstrated how sentiment analysis can be applied to social media data to extract meaningful insights. By cleaning the text data and applying sentiment analysis techniques, we gained a better understanding of the emotional tone of tweets related to Amazon. The visualizations, including the sentiment barchart, word cloud, and time series plot, provide a comprehensive view of sentiment trends and key themes in the data. These insights can be valuable for monitoring public perception, identifying emerging trends, and making informed decisions based on social media sentiment.
-
-## Setup Instructions
-
-### Required Packages
-
-Ensure you have the following R packages installed:
-
-```r
-install.packages(c('tidyverse', 'ggplot2', 'patchwork', 'syuzhet', 'wordcloud', 'tm', 'RColorBrewer', 'lubridate'))
