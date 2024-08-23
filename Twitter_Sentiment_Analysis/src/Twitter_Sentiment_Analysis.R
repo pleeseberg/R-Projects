@@ -1,4 +1,4 @@
-# Load necessary packages
+# Install and load required packages
 if(!require(tidyverse)) install.packages('tidyverse', dependencies=TRUE)
 if(!require(syuzhet)) install.packages('syuzhet', dependencies=TRUE)
 if(!require(wordcloud)) install.packages('wordcloud', dependencies=TRUE)
@@ -6,6 +6,7 @@ if(!require(tm)) install.packages('tm', dependencies=TRUE)
 if(!require(RColorBrewer)) install.packages('RColorBrewer', dependencies=TRUE)
 if(!require(ggplot2)) install.packages('ggplot2', dependencies=TRUE)
 if(!require(lubridate)) install.packages('lubridate', dependencies=TRUE)
+if(!require(tidytext)) install.packages('tidytext', dependencies=TRUE)
 
 library(tidyverse)
 library(syuzhet)
@@ -14,9 +15,13 @@ library(tm)
 library(RColorBrewer)
 library(ggplot2)
 library(lubridate)
+library(tidytext)
+
+# Set the working directory to the location of the project
+setwd("/Users/paigeleeseberg/Downloads/R-Projects/Twitter_Sentiment_Analysis")
 
 # Load the dataset
-textDataAll <- read.csv("/Users/paigeleeseberg/Downloads/R-Projects/AMZN-tweets.csv")
+textDataAll <- read.csv("data/AMZN-tweets.csv")
 
 # Examine the structure of the dataset
 str(textDataAll)
@@ -33,18 +38,18 @@ text_clean <- textDataAll$text %>%
   tolower() %>%
   removePunctuation() %>%
   removeNumbers() %>%
-  removeWords(stopwords("en")) %>% # Remove stop words
-  removeWords(c("amzn", "tsla", "aapl", "nflx", "googl", "spy", "qqq", "fb", "nvda", "msft", "stocks", "stock", "amd", "goog", "spx", "gme", "twtr", "baba", "ba", "nio", "btc", "c", "dis")) %>% # Remove specific terms if needed
-  str_replace_all("\\$[A-Za-z]+", "") %>% # Remove stock ticker symbols
-  str_replace_all("#[A-Za-z]+", "") %>% # Remove hashtags
-  str_replace_all("[^[:alpha:][:space:]]", "") %>% # Remove any remaining special characters
+  removeWords(stopwords("en")) %>%
+  removeWords(c("amzn", "tsla", "aapl", "nflx", "googl", "spy", "qqq", "fb", "nvda", "msft", "stocks", "stock", "amd", "goog", "spx", "gme", "twtr", "baba", "ba", "nio", "btc", "c", "dis")) %>%
+  str_replace_all("\\$[A-Za-z]+", "") %>%
+  str_replace_all("#[A-Za-z]+", "") %>%
+  str_replace_all("[^[:alpha:][:space:]]", "") %>%
   stripWhitespace()
 
 # Remove single-letter words
 text_clean <- text_clean %>%
-  str_split(pattern = "\\s+") %>% # Split by whitespace
-  map(~ .[nchar(.) > 1]) %>% # Remove single-letter words
-  map(~ paste(., collapse = " ")) %>% # Collapse back to a single string
+  str_split(pattern = "\\s+") %>%
+  map(~ .[nchar(.) > 1]) %>%
+  map(~ paste(., collapse = " ")) %>%
   unlist()
 
 # Re-add the cleaned text to the dataframe
@@ -75,15 +80,15 @@ trigrams <- textDataAll %>%
 trigrams_count <- trigrams %>%
   count(trigram, sort=TRUE)
 
-# Print the top 30 words
-top_30_words <- unigrams_count %>%
-  top_n(30, n) %>%
+# Print the top 10 words
+top_10_words <- unigrams_count %>%
+  top_n(10, n) %>%
   arrange(desc(n))
 
-print(top_30_words)
+print(top_10_words)
 
 # Generate and save the word cloud for unigrams
-png(filename = "/Users/paigeleeseberg/Downloads/R-Projects/wordcloud.png", width = 800, height = 600)
+png(filename = "results/wordcloud.png", width = 800, height = 600)
 wordcloud(words = unigrams_count$word, freq = unigrams_count$n, 
           min.freq = 1, max.words = 200, random.order = FALSE, rot.per = 0.35, 
           colors = brewer.pal(8, "Dark2"))
@@ -104,7 +109,7 @@ sentiment_join <- textDataAll %>%
 head(sentiment_join)
 
 # Save the cleaned text and sentiment data to a CSV file
-write.csv(sentiment_join, "/Users/paigeleeseberg/Downloads/R-Projects/sentiment_analysis_data.csv", row.names = FALSE)
+write.csv(sentiment_join, "data/sentiment_analysis_data.csv", row.names = FALSE)
 
 # Create sentiment bar chart data
 sentiment_summary <- sentiment_nrc %>%
@@ -134,4 +139,4 @@ sentimentBarchart <- sentiment_summary %>%
   scale_fill_discrete(name = "Rating")
 
 # Save the plot
-ggsave(filename = "/Users/paigeleeseberg/Downloads/R-Projects/sentiment_barchart.png", plot = sentimentBarchart, width = 10, height = 6)
+ggsave(filename = "results/sentiment_barchart.png", plot = sentimentBarchart, width = 10, height = 6)
