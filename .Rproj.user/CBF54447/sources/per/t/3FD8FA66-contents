@@ -1,0 +1,99 @@
+# Load Necessary Packages
+library(tidyverse)
+library(lubridate)
+library(syuzhet)
+library(gridExtra)
+
+# Clear environment to avoid unexpected outputs
+rm(list = ls())
+
+# Load and Prepare Data
+print("Loading and preparing data...")
+textDataAll <- read.csv("~/Downloads/R-Projects/AMZN-tweets.csv")
+print(paste("Number of rows in original data:", nrow(textDataAll)))
+
+# Prepare and clean data
+textDataAll <- textDataAll %>%
+  mutate(
+    desc = "AMZN",
+    datetime = as.POSIXct(datetime, format="%m/%d/%y %H:%M", tz="America/New_York"),
+    date = as.Date(datetime)
+  )
+print("Data preparation complete.")
+print(paste("Number of rows after data preparation:", nrow(textDataAll)))
+
+# Perform sentiment analysis
+print("Performing sentiment analysis...")
+sentiment_scores <- syuzhet::get_sentiment(textDataAll$text, method = "nrc")
+
+# Ensure sentiment_scores is a data frame and matches the number of rows in textDataAll
+sentiment_scores <- as.data.frame(t(sentiment_scores)) %>% 
+  setNames(c("anger", "anticipation", "disgust", "fear", "joy", "negative", "positive", "sadness", "surprise", "trust"))
+print(paste("Sentiment scores dimensions:", dim(sentiment_scores)))
+
+# Combine sentiment scores with the original data
+print("Combining sentiment scores with the original data...")
+textDataAll <- textDataAll %>%
+  bind_cols(sentiment_scores)
+print(paste("Number of rows after combining data:", nrow(textDataAll)))
+print(paste("Columns in combined data:", colnames(textDataAll)))
+
+# Reshape the data
+print("Reshaping the data...")
+textDataLong <- textDataAll %>%
+  pivot_longer(
+    cols = starts_with("anger"):starts_with("trust"),
+    names_to = "nrc",
+    values_to = "sentiment"
+  ) %>%
+  drop_na(sentiment) %>%
+  mutate(date = as.Date(round_date(datetime, "1 day"))) %>%
+  group_by(date, desc, nrc) %>%
+  summarize(sentiment = mean(sentiment, na.rm = TRUE), .groups = "drop")
+print(paste("Number of rows in long data format:", nrow(textDataLong)))
+
+# Define the specific sentiments of interest
+sentiments_of_interest <- c("anger", "anticipation", "disgust", "fear", "joy", "negative", "positive", "sadness", "surprise", "trust")
+print(paste("Sentiments of interest:", paste(sentiments_of_interest, collapse = ", ")))
+
+# Function to plot sentiment time series
+plot_sentiment_time_series <- function(sentiment_data, sentiment_type) {
+  sentiment_data %>%
+    filter(nrc == sentiment_type) %>%
+    ggplot(aes(x = date, y = sentiment)) +
+    geom_line(color = "blue") +
+    geom_smooth(span = 0.5, se = FALSE, method = 'loess') +
+    scale_y_continuous(limits = c(0, max(sentiment_data$sentiment, na.rm = TRUE))) +
+    scale_x_date(date_breaks = "1 week", date_labels = "%b %d") +
+    theme_bw() +
+    theme(
+      text = element_text(family = "Georgia"),
+      plot.title = element_text(face = "bold"),
+      axis.text = element_text(size = 9),
+      axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0),
+      legend.position = "bottom",
+      legend.title = element_blank()
+    ) +
+    labs(x = NULL, y = NULL, title = paste("Sentiment -", sentiment_type))
+}
+
+# Generate plots for each sentiment
+print("Generating plots for each sentiment...")
+plot_list <- lapply(sentiments_of_interest, function(sentiment) {
+  plot_sentiment_time_series(textDataLong, sentiment)
+})
+print("Plots generated.")
+
+# Arrange plots in a grid
+print("Arranging plots in a grid...")
+grid.arrange(grobs = plot_list, ncol = 2)  # Adjust ncol as needed
+
+# Save the arranged plots as a PNG file
+print("Saving the arranged plots as a PNG file...")
+ggsave(filename = "~/Downloads/R-Projects/sentiment_time_series_plots.png", 
+       plot = last_plot(), 
+       width = 12, 
+       height = 16, 
+       dpi = 300)
+
+print("Sentiment time series plots saved.")
