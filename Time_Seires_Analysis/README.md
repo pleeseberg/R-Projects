@@ -104,33 +104,50 @@ In summary, the training set is crucial for developing and validating the ARIMA 
 **Time Series Plots:**
 
 - **MasterCard Closing Prices:**
+
 ![MasterCard Closing Prices](results/time_series_plots/MasterCard_Closing_Prices.png)
+
   - This plot shows the historical closing prices of MasterCard, reflecting the stock’s performance over time.
+
 - **Visa Closing Prices:**
+
 ![Visa Closing Prices](results/time_series_plots/Visa_Closing_Prices.png)
+
   - This plot displays the historical closing prices of Visa, illustrating the stock’s trends over the same period.
 
 **Forecast Plots:**
 
 - **Forecast for MasterCard:**
+
 ![Forecast MasterCard](results/forecast_plots/Forecast_MasterCard.png)
+
   - This plot presents the forecasted values of MasterCard closing prices along with the actual values, showcasing the model’s performance.
+
 - **Forecast for Visa:**
+
 ![Forecast Visa](results/forecast_plots/Forecast_Visa.png)
+
   - This plot shows the forecasted values of Visa closing prices compared with the actual values, highlighting the forecast accuracy.
 
 **Residual Plots:**
 
 - **Residuals of MasterCard ARIMA Model:**
+
 ![Residuals MasterCard](results/residual_plots/residuals_MasterCard.png)
+
   - This plot illustrates the residuals from the ARIMA model fitted to MasterCard closing prices, depicting the difference between observed and predicted values.
+
 - **Residuals of Visa ARIMA Model:**
+
 ![Residuals Visa](results/residual_plots/residuals_Visa.png)
-  - This plot shows the residuals from the ARIMA model fitted to Visa closing prices, revealing the prediction errors.
+
+  - This plot shows the residuals from the ARIMA model for Visa closing prices, providing insight into model fit.
 
 ### Conclusion
 
-The ARIMA models provided a robust framework for forecasting the closing prices of MasterCard and Visa stocks. The analysis demonstrated the effectiveness of ARIMA in capturing the temporal patterns in stock prices and predicting future trends. Despite the models' strong performance, further refinement and validation may enhance forecasting accuracy.
+The ARIMA models applied to the historical stock price data for MasterCard and Visa showed varying levels of accuracy in forecasting future stock prices. While the models provided reasonable forecasts, the residual diagnostics indicated some areas where model improvements could be made. Further analysis and model refinement are suggested to enhance predictive performance.
 
----
+### References
 
+[1] Box, G. E. P., Jenkins, G. M., & Reinsel, G. C. (2015). *Time Series Analysis: Forecasting and Control* (5th ed.). Wiley.
+[2] Hyndman, R. J., & Athanasopoulos, G. (2018). *Forecasting: principles and practice*. OTexts.
