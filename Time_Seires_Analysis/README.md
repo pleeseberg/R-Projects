@@ -117,7 +117,7 @@ In summary, the training set is crucial for developing and validating the ARIMA 
 
 **Residual Plots:**
 
-- **Residuals of MasterCard ARIMA Model:** ![Residuals MasterCard](residual_plots/residuals_MasterCard.png)
+- **Residuals of MasterCard ARIMA Model:** ![Residuals MasterCard](results/residual_plots/residuals_MasterCard.png)
   - This plot illustrates the residuals from the ARIMA model fitted to MasterCard closing prices, depicting the difference between observed and predicted values.
 - **Residuals of Visa ARIMA Model:** ![Residuals Visa](residual_plots/residuals_Visa.png)
   - This plot shows the residuals from the ARIMA model fitted to Visa closing prices, revealing the prediction errors.
