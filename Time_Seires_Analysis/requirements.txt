@@ -1,0 +1,6 @@
+### Required Packages
+
+Ensure you have the following R packages installed:
+
+```r
+install.packages(c('tidyverse', 'ggplot2', 'patchwork', 'syuzhet', 'wordcloud', 'tm', 'RColorBrewer', 'lubridate'))

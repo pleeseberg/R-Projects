@@ -8,8 +8,7 @@ library(ggplot2)
 library(patchwork)
 
 # Load the sentiment analysis data
-sentiment_data <- read.csv("/Users/paigeleeseberg/Downloads/R-Projects/sentiment_analysis_data.csv")
-
+sentiment_data <- read.csv("/Users/paigeleeseberg/Downloads/R-Projects/Twitter_Sentiment_Analysis/data/sentiment_analysis_data.csv")
 # Format the date column
 sentiment_data$date <- as.Date(sentiment_data$date)
 
@@ -83,7 +82,7 @@ facet_plots <- sentiment_time_series %>%
 combined_plot <- timeline_plot / facet_plots
 
 # Save the combined plot
-ggsave(filename = "/Users/paigeleeseberg/Downloads/R-Projects/sentiment_time_series_combined.png", plot = combined_plot, width = 16, height = 14, units = "in")
+ggsave(filename = "/Users/paigeleeseberg/Downloads/R-Projects/Twitter_Sentiment_Analysis/results/sentiment_time_series_combined.png", plot = combined_plot, width = 16, height = 14, units = "in")
 
 # Print a summary of the time series data
 print(head(sentiment_time_series))
