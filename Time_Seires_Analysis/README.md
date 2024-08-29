@@ -103,23 +103,29 @@ In summary, the training set is crucial for developing and validating the ARIMA 
 
 **Time Series Plots:**
 
-- **MasterCard Closing Prices:** ![MasterCard Closing Prices](time_series_plots/MasterCard_Closing_Prices.png)
+- **MasterCard Closing Prices:**
+![MasterCard Closing Prices](results/time_series_plots/MasterCard_Closing_Prices.png)
   - This plot shows the historical closing prices of MasterCard, reflecting the stock’s performance over time.
-- **Visa Closing Prices:** ![Visa Closing Prices](time_series_plots/Visa_Closing_Prices.png)
+- **Visa Closing Prices:**
+![Visa Closing Prices](results/time_series_plots/Visa_Closing_Prices.png)
   - This plot displays the historical closing prices of Visa, illustrating the stock’s trends over the same period.
 
 **Forecast Plots:**
 
-- **Forecast for MasterCard:** ![Forecast MasterCard](forecast_plots/Forecast_MasterCard.png)
+- **Forecast for MasterCard:**
+![Forecast MasterCard](results/forecast_plots/Forecast_MasterCard.png)
   - This plot presents the forecasted values of MasterCard closing prices along with the actual values, showcasing the model’s performance.
-- **Forecast for Visa:** ![Forecast Visa](forecast_plots/Forecast_Visa.png)
+- **Forecast for Visa:**
+![Forecast Visa](results/forecast_plots/Forecast_Visa.png)
   - This plot shows the forecasted values of Visa closing prices compared with the actual values, highlighting the forecast accuracy.
 
 **Residual Plots:**
 
-- **Residuals of MasterCard ARIMA Model:** ![Residuals MasterCard](results/residual_plots/residuals_MasterCard.png)
+- **Residuals of MasterCard ARIMA Model:**
+![Residuals MasterCard](results/residual_plots/residuals_MasterCard.png)
   - This plot illustrates the residuals from the ARIMA model fitted to MasterCard closing prices, depicting the difference between observed and predicted values.
-- **Residuals of Visa ARIMA Model:** ![Residuals Visa](residual_plots/residuals_Visa.png)
+- **Residuals of Visa ARIMA Model:**
+![Residuals Visa](results/residual_plots/residuals_Visa.png)
   - This plot shows the residuals from the ARIMA model fitted to Visa closing prices, revealing the prediction errors.
 
 ### Conclusion
