@@ -1,17 +1,40 @@
-## Stock Prices
+## Time Series Analysis in R on Historical Stock Price Data
 
 ### Objective
 
-The objective of this project was to conduct a comprehensive time series analysis on the closing prices of MasterCard and Visa stocks using ARIMA (AutoRegressive Integrated Moving Average) modeling. We aimed to evaluate the predictive accuracy of ARIMA models by comparing forecasted values against actual observed data.
+The objective of this project was to conduct a comprehensive time series analysis on the closing prices of MasterCard and Visa stocks using ARIMA (AutoRegressive Integrated Moving Average) modeling. I aimed to evaluate the predictive accuracy of ARIMA models by comparing forecasted values against actual observed data.
+
+### Data Description
+
+This dataset contains historical stock price data for MasterCard (MA) and Visa (V) from June 2008 to June 2024. The data includes daily stock prices with the following columns:
+
+- **Date:** The date of the recorded stock prices.
+- **Open_M:** Opening price of MasterCard stock.
+- **High_M:** Highest price of MasterCard stock for the day.
+- **Low_M:** Lowest price of MasterCard stock for the day.
+- **Close_M:** Closing price of MasterCard stock.
+- **Adj Close_M:** Adjusted closing price of MasterCard stock.
+- **Volume_M:** Trading volume of MasterCard stock.
+- **Open_V:** Opening price of Visa stock.
+- **High_V:** Highest price of Visa stock for the day.
+- **Low_V:** Lowest price of Visa stock for the day.
+- **Close_V:** Closing price of Visa stock.
+- **Adj Close_V:** Adjusted closing price of Visa stock.
+- **Volume_V:** Trading volume of Visa stock.
+
+**Dataset Highlights:**
+- Comprehensive historical data covering over 15 years.
+- Useful for analyzing the stock performance of two major financial services companies.
+- Ideal for time series analysis, financial forecasting, and comparative studies.
 
 ### Data Preprocessing
 
-- **Data Loading and Preparation:** We began by loading the dataset and converting the date column to a suitable time series format. Missing values were checked and handled appropriately.
+- **Data Loading and Preparation:** I began by loading the dataset and converting the date column to a suitable time series format. Missing values were checked and handled appropriately.
 - **Time Series Creation:** Time series objects were created for the closing prices of MasterCard and Visa, facilitating the subsequent modeling process.
 
 ### ARIMA Modeling
 
-We fitted ARIMA models to the historical data of both MasterCard and Visa stocks. The models were trained on historical data and used to forecast future values. These forecasts were then compared against a testing dataset to assess their accuracy.
+I fitted ARIMA models to the historical data of both MasterCard and Visa stocks. The models were trained on historical data and used to forecast future values. These forecasts were then compared against a testing dataset to assess their accuracy.
 
 ### Summary Statistics
 
@@ -62,6 +85,37 @@ We fitted ARIMA models to the historical data of both MasterCard and Visa stocks
 
 **Visa:**
 - **Ljung-Box Test:** Q* = 1269.8, df = 503, p-value < 2.2e-16
+
+### Plots
+
+**Time Series Plots:**
+
+- **MasterCard Closing Prices:** ![MasterCard Closing Prices](MasterCard_Closing_Prices.png)
+  - This plot shows the historical closing prices of MasterCard, reflecting the stock’s performance over time.
+- **Visa Closing Prices:** ![Visa Closing Prices](Visa_Closing_Prices.png)
+  - This plot displays the historical closing prices of Visa, illustrating the stock’s trends over the same period.
+
+**Forecast Plots:**
+
+- **Forecast for MasterCard:** ![Forecast MasterCard](Forecast_MasterCard.png)
+  - This plot presents the forecasted values of MasterCard closing prices along with the actual values, showcasing the model’s performance.
+- **Forecast for Visa:** ![Forecast Visa](Forecast_Visa.png)
+  - This plot shows the forecasted values of Visa closing prices compared with the actual values, highlighting the forecast accuracy.
+
+**Residual Plots:**
+
+- **Residuals of MasterCard ARIMA Model:** ![Residuals MasterCard](residuals_MasterCard.png)
+  - This plot illustrates the residuals from the ARIMA model fitted to MasterCard closing prices, depicting the difference between observed and predicted values.
+- **Residuals of Visa ARIMA Model:** ![Residuals Visa](residuals_Visa.png)
+  - This plot shows the residuals from the ARIMA model fitted to Visa closing prices, highlighting the deviation between observed and predicted values.
+
+### Files
+
+- **Forecast Results:** [forecast_results.csv](forecast_results.csv) – Contains forecasted values for MasterCard and Visa.
+- **Residuals Data:** [residuals_data.csv](residuals_data.csv) – Contains residuals from the ARIMA models for both MasterCard and Visa.
+- **Time Series Plots:** [MasterCard_Closing_Prices.png](MasterCard_Closing_Prices.png), [Visa_Closing_Prices.png](Visa_Closing_Prices.png)
+- **Forecast Plots:** [Forecast_MasterCard.png](Forecast_MasterCard.png), [Forecast_Visa.png](Forecast_Visa.png)
+- **Residual Plots:** [residuals_MasterCard.png](residuals_MasterCard.png), [residuals_Visa.png](residuals_Visa.png)
 
 ### Conclusion
 
