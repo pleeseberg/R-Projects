@@ -145,7 +145,33 @@ In summary, the training set is crucial for developing and validating the ARIMA 
 
 ### Conclusion
 
-The ARIMA models applied to the historical stock price data for MasterCard and Visa showed varying levels of accuracy in forecasting future stock prices. While the models provided reasonable forecasts, the residual diagnostics indicated some areas where model improvements could be made. Further analysis and model refinement are suggested to enhance predictive performance.
+The ARIMA models used for forecasting MasterCard and Visa stock prices provided valuable insights but also highlighted areas for improvement.
+
+#### Model Performance
+
+- **MasterCard ARIMA Model:** The ARIMA(0,1,1) with drift model exhibited a Root Mean Squared Error (RMSE) of 3.6635 and a Mean Absolute Error (MAE) of 1.9580, indicating that the model struggled to capture the underlying trends effectively. The Mean Absolute Percentage Error (MAPE) of 1.3129 showed that forecasts were, on average, about 1.31% off from actual values. The residuals exhibited some structure, suggesting the model could be improved.
+
+- **Visa ARIMA Model:** The ARIMA(1,1,0) with drift model performed better with an RMSE of 2.0659 and an MAE of 1.1604. The MAPE of 1.2079 indicated slightly better forecast accuracy compared to MasterCard. Despite this, residual analysis suggested room for improvement.
+
+#### Forecasting Accuracy and Residual Analysis
+
+- **Residual Diagnostics:** Both models showed significant autocorrelation in the residuals (p-value < 2.2e-16), indicating that the models did not fully capture all temporal dependencies.
+
+#### Key Observations
+
+- **MasterCard:** Higher error rates and residual autocorrelation suggest the need for model refinement. Exploring SARIMA or models with exogenous variables may improve accuracy.
+  
+- **Visa:** Better model fit but still potential for enhancement. Further exploration of model configurations or additional predictors could be beneficial.
+
+#### Recommendations
+
+1. **Model Refinement:** Test different ARIMA configurations or seasonal components to improve accuracy.
+2. **Alternative Models:** Consider evaluating SARIMA, ETS, or machine learning approaches for comparison.
+3. **Additional Features:** Integrate external factors like market indices or economic indicators to enhance model predictions.
+
+#### Final Thoughts
+
+The ARIMA models offered a foundational approach to forecasting but revealed opportunities for refinement. By exploring alternative models and incorporating additional features, forecasting accuracy can be enhanced, providing more actionable insights for stock price analysis.
 
 ### References
 
