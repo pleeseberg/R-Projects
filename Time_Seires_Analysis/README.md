@@ -105,13 +105,13 @@ In summary, the training set is crucial for developing and validating the ARIMA 
 
 - **MasterCard Closing Prices:**
 
-![MasterCard Closing Prices](results/MasterCard_Closing_Prices.png)
+![MasterCard Closing Prices](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/MasterCard_Closing_Prices.png)
 
   - This plot shows the historical closing prices of MasterCard, reflecting the stock’s performance over time.
 
 - **Visa Closing Prices:**
 
-![Visa Closing Prices](results/Visa_Closing_Prices.png)
+![Visa Closing Prices](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Visa_Closing_Prices.png)
 
   - This plot displays the historical closing prices of Visa, illustrating the stock’s trends over the same period.
 
@@ -119,13 +119,13 @@ In summary, the training set is crucial for developing and validating the ARIMA 
 
 - **Forecast for MasterCard:**
 
-![Forecast MasterCard](results/Forecast_MasterCard.png)
+![Forecast MasterCard](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Forecast_MasterCard.png)
 
   - This plot presents the forecasted values of MasterCard closing prices along with the actual values, showcasing the model’s performance.
 
 - **Forecast for Visa:**
 
-![Forecast Visa](results/Forecast_Visa.png)
+![Forecast Visa](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Forecast_Visa.png)
 
   - This plot shows the forecasted values of Visa closing prices compared with the actual values, highlighting the forecast accuracy.
 
@@ -133,13 +133,13 @@ In summary, the training set is crucial for developing and validating the ARIMA 
 
 - **Residuals of MasterCard ARIMA Model:**
 
-![Residuals MasterCard](results/Residuals_MasterCard.png)
+![Residuals MasterCard](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Residuals_MasterCard.png)
 
   - This plot illustrates the residuals from the ARIMA model fitted to MasterCard closing prices, depicting the difference between observed and predicted values.
 
 - **Residuals of Visa ARIMA Model:**
 
-![Residuals Visa](results/Residuals_Visa.png)
+![Residuals Visa](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Residuals_Visa.png)
 
   - This plot shows the residuals from the ARIMA model for Visa closing prices, providing insight into model fit.
 
