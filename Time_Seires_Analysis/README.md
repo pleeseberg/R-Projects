@@ -36,6 +36,19 @@ This dataset contains historical stock price data for MasterCard (MA) and Visa (
 
 I fitted ARIMA models to the historical data of both MasterCard and Visa stocks. The models were trained on historical data and used to forecast future values. These forecasts were then compared against a testing dataset to assess their accuracy.
 
+### Training Set Importance
+
+In the context of this time series analysis project, the training set plays a critical role for the following reasons:
+
+- **Model Fitting:** The training set is used to fit the ARIMA (AutoRegressive Integrated Moving Average) models. By training the models on historical stock price data, the models learn the patterns and dynamics of the stock prices, which is essential for generating accurate forecasts.
+- **Parameter Estimation:** For ARIMA models, parameters such as autoregressive terms (AR), differencing (I), and moving average terms (MA) need to be estimated. The training set provides the data needed to estimate these parameters effectively.
+- **Forecasting:** The ARIMA models are trained on the historical data to make predictions about future stock prices. The training set helps the model understand the past trends and seasonality in the stock prices, which is crucial for generating reliable forecasts.
+- **Performance Assessment:** By comparing the forecasts from the ARIMA models against actual observed data (which is not used during training), you can assess how well the models generalize to new data. This evaluation is crucial to understand the model’s forecasting accuracy and make improvements if needed.
+- **Avoiding Overfitting:** Using a separate training set helps ensure that the model is not just memorizing the historical data but is learning generalizable patterns. This is important to avoid overfitting, where the model performs well on the training data but poorly on new or unseen data.
+- **Model Selection and Validation:** The training set allows you to test different ARIMA configurations and select the best model based on its performance metrics. This process is crucial to ensure that the chosen model is the most appropriate for forecasting future stock prices.
+
+In summary, the training set is crucial for developing and validating the ARIMA models in this time series analysis project. It helps in fitting the models, estimating parameters, generating forecasts, and ensuring that the models perform well on new data.
+
 ### Summary Statistics
 
 | Statistic                  | MasterCard            | Visa                  |
@@ -90,35 +103,64 @@ I fitted ARIMA models to the historical data of both MasterCard and Visa stocks.
 
 **Time Series Plots:**
 
-- **MasterCard Closing Prices:** ![MasterCard Closing Prices](MasterCard_Closing_Prices.png)
+- **MasterCard Closing Prices:**
+
+![MasterCard Closing Prices](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/MasterCard_Closing_Prices.png)
+
   - This plot shows the historical closing prices of MasterCard, reflecting the stock’s performance over time.
-- **Visa Closing Prices:** ![Visa Closing Prices](Visa_Closing_Prices.png)
+
+- **Visa Closing Prices:**
+
+![Visa Closing Prices](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Visa_Closing_Prices.png)
+
   - This plot displays the historical closing prices of Visa, illustrating the stock’s trends over the same period.
 
 **Forecast Plots:**
 
-- **Forecast for MasterCard:** ![Forecast MasterCard](Forecast_MasterCard.png)
+- **Forecast for MasterCard:**
+
+![Forecast MasterCard](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Forecast_MasterCard.png)
+
   - This plot presents the forecasted values of MasterCard closing prices along with the actual values, showcasing the model’s performance.
-- **Forecast for Visa:** ![Forecast Visa](Forecast_Visa.png)
+
+- **Forecast for Visa:**
+
+![Forecast Visa](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Forecast_Visa.png)
+
   - This plot shows the forecasted values of Visa closing prices compared with the actual values, highlighting the forecast accuracy.
 
 **Residual Plots:**
 
-- **Residuals of MasterCard ARIMA Model:** ![Residuals MasterCard](residuals_MasterCard.png)
+- **Residuals of MasterCard ARIMA Model:**
+
+![Residuals MasterCard](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Residuals_MasterCard.png)
+
   - This plot illustrates the residuals from the ARIMA model fitted to MasterCard closing prices, depicting the difference between observed and predicted values.
-- **Residuals of Visa ARIMA Model:** ![Residuals Visa](residuals_Visa.png)
-  - This plot shows the residuals from the ARIMA model fitted to Visa closing prices, highlighting the deviation between observed and predicted values.
 
-### Files
+- **Residuals of Visa ARIMA Model:**
 
-- **Forecast Results:** [forecast_results.csv](forecast_results.csv) – Contains forecasted values for MasterCard and Visa.
-- **Residuals Data:** [residuals_data.csv](residuals_data.csv) – Contains residuals from the ARIMA models for both MasterCard and Visa.
-- **Time Series Plots:** [MasterCard_Closing_Prices.png](MasterCard_Closing_Prices.png), [Visa_Closing_Prices.png](Visa_Closing_Prices.png)
-- **Forecast Plots:** [Forecast_MasterCard.png](Forecast_MasterCard.png), [Forecast_Visa.png](Forecast_Visa.png)
-- **Residual Plots:** [residuals_MasterCard.png](residuals_MasterCard.png), [residuals_Visa.png](residuals_Visa.png)
+![Residuals Visa](/Users/paigeleeseberg/Downloads/R-Projects/Time_Seires_Analysis/results/Residuals_Visa.png)
+
+  - This plot shows the residuals from the ARIMA model for Visa closing prices, providing insight into model fit.
 
 ### Conclusion
 
-The ARIMA models offered a structured approach to forecasting stock prices. The models showed reasonable performance on the training data but revealed significant forecast errors on the test data for both MasterCard and Visa. For MasterCard, the forecast indicated large errors in the test set, while Visa exhibited more stable predictions but with notable forecast errors. The residual diagnostics confirmed that both models had residuals significantly autocorrelated, suggesting that there is room for improvement in the models.
+The ARIMA models used for forecasting MasterCard and Visa stock prices provided a detailed analysis of their historical performance. The models were trained on historical data and evaluated for their predictive accuracy. While both models showed reasonable performance, there were differences in their forecasting abilities.
 
-Overall, while the ARIMA models provide valuable insights and forecasts, additional analysis and market considerations are necessary for informed investment decisions.
+**Model Selection:**
+- **MasterCard:** ARIMA(0,1,1) with drift provided a decent fit, though there is room for improvement in accuracy.
+- **Visa:** ARIMA(1,1,0) with drift performed slightly better in terms of forecast accuracy compared to the MasterCard model.
+
+**Recommendations:**
+- Further model refinement and experimentation with different configurations could enhance forecasting accuracy.
+- Incorporating additional features or external variables might improve model performance and prediction reliability.
+
+### Future Work
+
+- **Model Enhancement:** Explore other time series models such as SARIMA or machine learning techniques for better accuracy.
+- **Extended Data:** Analyze additional features or use longer historical data to improve forecasting models.
+
+### References
+
+1. Hyndman, R.J., & Athanasopoulos, G. (2018). *Forecasting: principles and practice*. OTexts. Retrieved from https://otexts.com/fpp3/
+2. Box, G.E.P., Jenkins, G.M., & Reinsel, G.C. (2015). *Time series analysis: forecasting and control*. Wiley.
